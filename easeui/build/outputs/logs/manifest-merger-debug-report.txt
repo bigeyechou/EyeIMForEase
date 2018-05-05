@@ -1,0 +1,25 @@
+-- Merging decision tree log ---
+manifest
+ADDED from G:\AndroidProject\EyeIMforEase\EyeIMForEase\easeui\src\main\AndroidManifest.xml:1:1-4:12
+INJECTED from G:\AndroidProject\EyeIMforEase\EyeIMForEase\easeui\src\main\AndroidManifest.xml:1:1-4:12
+INJECTED from G:\AndroidProject\EyeIMforEase\EyeIMForEase\easeui\src\main\AndroidManifest.xml:1:1-4:12
+	package
+		ADDED from G:\AndroidProject\EyeIMforEase\EyeIMForEase\easeui\src\main\AndroidManifest.xml:1:70-100
+		INJECTED from G:\AndroidProject\EyeIMforEase\EyeIMForEase\easeui\src\main\AndroidManifest.xml
+		INJECTED from G:\AndroidProject\EyeIMforEase\EyeIMForEase\easeui\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from G:\AndroidProject\EyeIMforEase\EyeIMForEase\easeui\src\main\AndroidManifest.xml:1:11-69
+uses-sdk
+INJECTED from G:\AndroidProject\EyeIMforEase\EyeIMForEase\easeui\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from G:\AndroidProject\EyeIMforEase\EyeIMForEase\easeui\src\main\AndroidManifest.xml
+INJECTED from G:\AndroidProject\EyeIMforEase\EyeIMForEase\easeui\src\main\AndroidManifest.xml
+INJECTED from G:\AndroidProject\EyeIMforEase\EyeIMForEase\easeui\src\main\AndroidManifest.xml
+INJECTED from G:\AndroidProject\EyeIMforEase\EyeIMForEase\easeui\src\main\AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from G:\AndroidProject\EyeIMforEase\EyeIMForEase\easeui\src\main\AndroidManifest.xml
+		ADDED from G:\AndroidProject\EyeIMforEase\EyeIMForEase\easeui\src\main\AndroidManifest.xml
+		INJECTED from G:\AndroidProject\EyeIMforEase\EyeIMForEase\easeui\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from G:\AndroidProject\EyeIMforEase\EyeIMForEase\easeui\src\main\AndroidManifest.xml
+		ADDED from G:\AndroidProject\EyeIMforEase\EyeIMForEase\easeui\src\main\AndroidManifest.xml
+		INJECTED from G:\AndroidProject\EyeIMforEase\EyeIMForEase\easeui\src\main\AndroidManifest.xml
