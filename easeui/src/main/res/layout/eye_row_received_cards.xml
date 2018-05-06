@@ -32,14 +32,14 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_margin="10dp"
-                android:background="@drawable/a_big_card"/>
+                android:background="@drawable/ease_default_avatar"/>
             <TextView
                 android:id="@+id/tv_name_card"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/iv_head_card"
                 android:padding="5dp"
-                android:text="God-Eye"/>
+                android:text="name"/>
             <TextView
                 android:id="@+id/tv_city_card"
                 android:layout_width="wrap_content"
@@ -47,7 +47,7 @@
                 android:layout_toRightOf="@+id/iv_head_card"
                 android:layout_below="@+id/tv_name_card"
                 android:padding="5dp"
-                android:text="青岛"/>
+                android:text="city"/>
 
         </RelativeLayout>
     </RelativeLayout>

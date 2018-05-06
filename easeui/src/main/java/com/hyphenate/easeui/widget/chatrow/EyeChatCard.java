@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.easeui.R;
 import com.hyphenate.easeui.widget.presenter.EaseChatRowPresenter;
+import com.hyphenate.exceptions.HyphenateException;
 
 /**
  * Created by 眼神 on 2018/5/6.
@@ -43,5 +44,15 @@ public class EyeChatCard extends EaseChatRow {
 
     @Override
     protected void onSetUpView() {
+        try {
+            String imageUrl =  message.getStringAttribute("USERHEADER");
+            String username =  message.getStringAttribute("USERNAME");
+            String usercity =  message.getStringAttribute("USERCITY");
+            iv_head.setImageDrawable(getResources().getDrawable(R.drawable.a_big_card));
+            tv_name.setText(username);
+            tv_city.setText(usercity);
+        } catch (HyphenateException e) {
+            e.printStackTrace();
+        }
     }
 }

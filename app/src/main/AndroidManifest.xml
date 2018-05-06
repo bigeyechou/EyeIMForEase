@@ -50,7 +50,6 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan"/>
 
-
         <!-- 设置环信应用的AppKey -->
         <meta-data android:name="EASEMOB_APPKEY"  android:value="19930126#eyeim" />
         <!-- 声明SDK所需的service SDK核心功能-->
