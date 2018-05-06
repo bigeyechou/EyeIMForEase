@@ -38,6 +38,7 @@ import com.hyphenate.easeui.widget.presenter.EaseChatRowPresenter;
 import com.hyphenate.easeui.widget.presenter.EaseChatTextPresenter;
 import com.hyphenate.easeui.widget.presenter.EaseChatVideoPresenter;
 import com.hyphenate.easeui.widget.presenter.EaseChatVoicePresenter;
+import com.hyphenate.easeui.widget.presenter.EyeChatCardPresenter;
 
 public class EaseMessageAdapter extends BaseAdapter{
 
@@ -63,7 +64,10 @@ public class EaseMessageAdapter extends BaseAdapter{
 	private static final int MESSAGE_TYPE_RECV_FILE = 11;
 	private static final int MESSAGE_TYPE_SENT_EXPRESSION = 12;
 	private static final int MESSAGE_TYPE_RECV_EXPRESSION = 13;
-	
+	//TODO 自定义消息 卡片 定义接收、发送消息类型
+	private static final int MESSAGE_TYPE_SEND_CARD = 14;
+	private static final int MESSAGE_TYPE_RECV_CARD = 15;
+
 	
 	public int itemTypeCount; 
 	
@@ -168,17 +172,20 @@ public class EaseMessageAdapter extends BaseAdapter{
 	
 	/**
 	 * get number of message type, here 14 = (EMMessage.Type) * 2
+	 * TODO 增加了卡片的 接收和发送 消息类型 所以再+2
 	 */
 	public int getViewTypeCount() {
 	    if(customRowProvider != null && customRowProvider.getCustomChatRowTypeCount() > 0){
-	        return customRowProvider.getCustomChatRowTypeCount() + 14;
+	        return customRowProvider.getCustomChatRowTypeCount() + 14 +2;
 	    }
-        return 14;
+        return 14 + 2;
     }
 	
 
 	/**
 	 * get type of item
+	 * TODO 增加了卡片的 接收和发送 消息类型 所以再+2
+	 *
 	 */
 	public int getItemViewType(int position) {
 		EMMessage message = getItem(position); 
@@ -187,13 +194,15 @@ public class EaseMessageAdapter extends BaseAdapter{
 		}
 		
 		if(customRowProvider != null && customRowProvider.getCustomChatRowType(message) > 0){
-		    return customRowProvider.getCustomChatRowType(message) + 13;
+		    return customRowProvider.getCustomChatRowType(message) + 13 + 2;
 		}
-		
+		//TODO 定义的卡片类型是EMMessage.Type.TXT ，所以加判断
 		if (message.getType() == EMMessage.Type.TXT) {
 		    if(message.getBooleanAttribute(EaseConstant.MESSAGE_ATTR_IS_BIG_EXPRESSION, false)){
 		        return message.direct() == EMMessage.Direct.RECEIVE ? MESSAGE_TYPE_RECV_EXPRESSION : MESSAGE_TYPE_SENT_EXPRESSION;
-		    }
+		    }else if (message.getBooleanAttribute("cards",false)){
+		    	return message.direct() == EMMessage.Direct.RECEIVE ? MESSAGE_TYPE_RECV_CARD : MESSAGE_TYPE_SEND_CARD;
+			}
 			return message.direct() == EMMessage.Direct.RECEIVE ? MESSAGE_TYPE_RECV_TXT : MESSAGE_TYPE_SENT_TXT;
 		}
 		if (message.getType() == EMMessage.Type.IMAGE) {
@@ -215,7 +224,7 @@ public class EaseMessageAdapter extends BaseAdapter{
 
 		return -1;// invalid
 	}
-
+	//TODO 设置消息类型 TXT-->创建 ChatRow（EyeChatCard） 和 ChatPresenter(EyeChatCardPresenter)
 	protected EaseChatRowPresenter createChatRowPresenter(EMMessage message, int position) {
         if(customRowProvider != null && customRowProvider.getCustomChatRow(message, position, this) != null){
 			return customRowProvider.getCustomChatRow(message, position, this);
@@ -227,7 +236,9 @@ public class EaseMessageAdapter extends BaseAdapter{
         case TXT:
             if(message.getBooleanAttribute(EaseConstant.MESSAGE_ATTR_IS_BIG_EXPRESSION, false)){
 				presenter = new EaseChatBigExpressionPresenter();
-            }else{
+            }else if (message.getBooleanAttribute("cards",false)){
+            	presenter = new EyeChatCardPresenter();
+			}else{
 				presenter = new EaseChatTextPresenter();
             }
             break;

@@ -107,11 +107,12 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
     static final int ITEM_TAKE_PICTURE = 1;
     static final int ITEM_PICTURE = 2;
     static final int ITEM_LOCATION = 3;
-    
-    protected int[] itemStrings = { R.string.attach_take_pic, R.string.attach_picture, R.string.attach_location };
+    //TODO 第一步：ITEM_CARD、itemStrings、itemdrawables、itemIds ---> registerExtendMenuItem
+    static final int ITEM_CARD = 4;
+    protected int[] itemStrings = { R.string.attach_take_pic, R.string.attach_picture, R.string.attach_location ,R.string.attach_card};
     protected int[] itemdrawables = { R.drawable.ease_chat_takepic_selector, R.drawable.ease_chat_image_selector,
-            R.drawable.ease_chat_location_selector };
-    protected int[] itemIds = { ITEM_TAKE_PICTURE, ITEM_PICTURE, ITEM_LOCATION };
+            R.drawable.ease_chat_location_selector,R.drawable.a_big_card  };
+    protected int[] itemIds = { ITEM_TAKE_PICTURE, ITEM_PICTURE, ITEM_LOCATION,ITEM_CARD };
     private boolean isMessageListInited;
     protected MyItemClickListener extendMenuItemClickListener;
     protected boolean isRoaming = false;
@@ -653,10 +654,37 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
             case ITEM_LOCATION:
                 startActivityForResult(new Intent(getActivity(), EaseBaiduMapActivity.class), REQUEST_CODE_MAP);
                 break;
+            //TODO  自定义消息 卡片
+            case ITEM_CARD:
+                showCard();
+                break;
 
             default:
                 break;
             }
+        }
+
+        //TODO 显示卡片 待扩展
+        private void showCard() {
+            //发送扩展消息
+            EMMessage message = EMMessage.createTxtSendMessage("大眼学长",toChatUsername);
+            //增加自己的属性
+            message.setAttribute("cards",true);
+            message.setAttribute("CARDS","cards");
+            message.setAttribute("USERNAME","God-Eye");
+            message.setAttribute("USERID","1");
+            message.setAttribute("USERHEADER","https://avatars3.githubusercontent.com/u/12809908?s=460&v=4");
+            message.setAttribute("USERCITY","青岛");
+            //设置群聊和聊天室发送消息
+            if (chatType == EaseConstant.CHATTYPE_GROUP){
+                message.setChatType(ChatType.GroupChat);
+            }else if (chatType == EaseConstant.CHATTYPE_CHATROOM){
+                message.setChatType(ChatType.ChatRoom);
+            }
+            //发送扩展消息
+            EMClient.getInstance().chatManager().sendMessage(message);
+            messageList.refresh();//刷新消息数据
+            //TODO 第二步 修改easeUi的 EaseMessageAdapter
         }
 
     }
